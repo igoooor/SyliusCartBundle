@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CartBundle\Provider;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\CartBundle\Entity\CartRepository;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\Storage\CartStorageInterface;
 
@@ -40,7 +40,7 @@ class CartProvider implements CartProviderInterface
     /**
      * Cart repository.
      *
-     * @var ObjectRepository
+     * @var CartRepository
      */
     protected $repository;
 
@@ -55,10 +55,10 @@ class CartProvider implements CartProviderInterface
      * Constructor.
      *
      * @param CartStorageInterface $storage
-     * @param ObjectManager        $manager
-     * @param ObjectRepository     $repository
+     * @param ObjectManager $manager
+     * @param CartRepository $repository
      */
-    public function __construct(CartStorageInterface $storage, ObjectManager $manager, ObjectRepository $repository)
+    public function __construct(CartStorageInterface $storage, ObjectManager $manager, CartRepository $repository)
     {
         $this->storage = $storage;
         $this->manager = $manager;
@@ -81,9 +81,6 @@ class CartProvider implements CartProviderInterface
         }
 
         $cart = $this->repository->createNew();
-        $this->manager->persist($cart);
-        $this->manager->flush($cart);
-
         $this->setCart($cart);
 
         return $cart;
