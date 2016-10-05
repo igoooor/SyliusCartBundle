@@ -29,10 +29,9 @@
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service">
                 <service
-                    factory-service="sylius.manager.cart"
-                    factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
+                    <factory service="sylius.manager.cart" method="getClassMetadata"/>
                     <argument>%sylius.model.cart.class%</argument>
                 </service>
             </argument>
@@ -43,10 +42,9 @@
             <argument type="service" id="sylius.manager.cart_item" />
             <argument type="service">
                 <service
-                    factory-service="sylius.manager.cart_item"
-                    factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
+                    <factory service="sylius.manager.cart_item" method="getClassMetadata"/>
                     <argument>%sylius.model.cart_item.class%</argument>
                 </service>
             </argument>
